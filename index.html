@@ -106,7 +106,7 @@
             <aside class="notes">This doesn't have to be the case!</aside>
         </section>
         <section>
-          <h2>Software</h2>
+          <h2>A11y (Accessibility) Software</h2>
           <p>Screen readers</p>
           <p>Speech recognition for control</p>
           <p>Automatic captioning systems</p>
@@ -115,7 +115,82 @@
             everything required for accessibility means. So why aren't they?
           </aside>
         </section>
+				<section>
+					<section>
+						<h2>Writing Accessible Software is Hard</h2>
+						<small><pre><code data-trim>
+<ol>
+  <li id="ch1Tab">
+    <a href="#ch1Panel">Chapter 1</a>
+  </li>
+  <li id="ch2Tab">
+    <a href="#ch2Panel">Chapter 2</a>
+  </li>
+  <li id="quizTab">
+    <a href="#quizPanel">Quiz</a>
+  </li>
+</ol>
 
+<div>
+  <div id="ch1Panel">Chapter 1 content goes here</div>
+  <div id="ch2Panel">Chapter 2 content goes here</div>
+  <div id="quizPanel">Quiz content goes here</div>
+</div>
+					</code></pre></small>
+					<p>16 lines of code</p>
+				</section>
+				<section>
+					<small><pre><code data-trim>
+<style>
+	li[aria-checked="true"] {
+		font-weight: bold;
+		background-image: url('images/dot.png');
+		background-repeat: no-repeat;
+		background-position: 5px 10px;
+	}
+</style>
+<ol role="tablist">
+  <li id="ch1Tab" role="tab">
+    <a href="#ch1Panel">Chapter 1</a>
+  </li>
+  <li id="ch2Tab" role="tab">
+    <a href="#ch2Panel">Chapter 2</a>
+  </li>
+  <li id="quizTab" role="tab">
+    <a href="#quizPanel">Quiz</a>
+  </li>
+</ol>
+
+<div>
+  <!-- Notice the role and aria-labelledby attributes we've added to describe these panels. -->
+  <div id="ch1Panel" role="tabpanel" aria-labelledby="ch1Tab">Chapter 1 content goes here</div>
+  <div id="ch2Panel" role="tabpanel" aria-labelledby="ch2Tab">Chapter 2 content goes here</div>
+  <div id="quizPanel" role="tabpanel" aria-labelledby="quizTab">Quiz content goes here</div>
+</div>
+<script>
+var processMenuChoice = function(item) {
+  // 'check' the selected item
+  item.setAttribute('aria-checked', 'true');
+  // 'un-check' the other menu items
+  var sib = item.parentNode.firstChild;
+  for (; sib; sib = sib.nextSibling ) {
+    if ( sib.nodeType === 1 && sib !== item ) {
+      sib.setAttribute('aria-checked', 'false');
+    }
+  }
+};
+</script>
+					</code></pre></small>
+					<p>37 lines of code - more than double</p>
+				</section>
+				<section>
+					<h2>Automatic Captions</h2>
+					<img src="img/actual.png">
+				</section>
+				<section>
+					<img src="img/caption.png">
+				</section>
+			</section>
         <section>
             <section>
                 <h2>Accessibility in Gaming</h2>
@@ -145,7 +220,7 @@
             <section>
                 <!-- Werdning-Hoffmans Desiese GimpyGGaming-->
                 <h2>Unconventional control methods</h2>
-                <p href="https:http//youtu.be/0y-caVznAlw?t=3m20s">
+                <p href="http//youtu.be/0y-caVznAlw?t=3m20s">
                     GimpyG Gaming video
                 </p>
                 <aside class="notes">
